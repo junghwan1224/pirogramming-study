@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!--<div class='collection'>
+  {% for article in article_list %}
+    <a class='collection-item' href="{% url 'core:blog_detail' article.pk %}">{{ article.title }}</a>
+  {% endfor %}
+</div>-->
+<div class='tag_list'>
+  {% for tag in tag_list %}
+    <a href="{% url 'core:article_list_by_tag' tag.pk %}"><div class='chip'>{{ tag.name }}</div></a>
+  {% endfor %}
+</div>
+<h3>Tag : {{ tag_selected.name }}</h3>
+<ul>
+  {% for article in article_list %}
+  <li>
+    <a href="{% url 'core:blog_detail' article.pk %}">{{ article.title }}</a>
+  </li>
+  {% empty %}
+  No Post
+  {% endfor %}
+</ul>
+<a class='waves-effect waves-light btn' href="{% url 'core:blog_create' %}">글쓰기</a>
+
+{% endblock %}

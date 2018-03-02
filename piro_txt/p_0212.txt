@@ -1,0 +1,119 @@
+https://github.com/dlkorea/piro_board
+
+$('#like_button').click(function(e){
+  e.preventDefault();
+  alert('hi');
+});
+처럼 preventDefault 함수를 이용해서 click 이벤트 내에서 기본 이벤트를 방지할 수 있다. 그러나 옛 버전에서는 위 방식이 동작 안될 수 있다.
+
+$('#like_button').click(function(e){
+  alert('hi');
+
+  return false;
+});
+로 작성하면 옛 버전에서 기본 이벤트 방지가 작동된다.
+
+* $('#like_button').attr('href'); 하면 url 정보 가져온다.
+
+* render 함수는 새로고침 하면 동일한 post를 다시 보내기 때문에 상황에 따라 redirect를 사용한다.
+
+* python list comprehension : [i for i in range(3, 7)] -> [3, 4 ,5 ,6] 리스트가 만들어진다.
+
+* list = []
+* for i in range(3, 7):
+      list.append(i)
+* 위 연산보다 훨씬 빠르게 리스트 연산을 할 수 있다.
+
+* [i//2 for i i range(5) if i%2 == 0] 조건을 줘서 리스트를 만들 수 있다.
+
+
+*** 2018. 2. 23 ***
+
+* (CBV) ListView 는 기본적으로 페이지네이터를 제공해준다. 이를 상속받아서 수정해서 쓸 수 있다.
+
+* request.GET.get('key name', default) -> 1개만 가지고 옴.
+
+* request.GET.getlist('key name', default) -> 전체를 리스트로 가지고 옴.
+
+* request.POST.getlist('key name', default)
+
+* enctype='multipart/form-data' : 파일도 업로드하고 싶을 때 form 태그 안에 작성해준다.
+
+* request.FILES 을 통해 데이터 파일을 받아올 수 있다.
+
+* django summernote
+
+* django form : clean method -> 필드에 대한 제약을 주고 싶을 때 사용? (django form validation 검색해서 읽어봐라)
+
+* if request.method == 'POST' and form.is_valid(): -> 해당 조건문에서 is_valid()가 먼저 나오면 안된다. and 연산자는 앞에 있는 조건이 true인 경우에만 뒤 조건을 보기 때문
+
+* 새로고침 : 직전 동일한 request를 다시 날려준다.
+
+* form.save()하고 return render하면 안되는 이유 : render하고 새로고침을 하면 동일한 요청을 보내기 때문에 10번 새로고침을 하면 동일한 내용의 요청이 10번 되기 때문에 redirect로 해준다.
+
+* model field 에서 blank=True 옵션이 없으면 추후에 form 작성 시 무조건 required 속성을 갖게 된다.
+
+* django summernote : 텍스트 에디터 삽입 가능
+
+* xss
+
+
+*** 2018. 2. 26 배포 ***
+
+* https://github.com/dlkorea/piro_deploy
+
+* 인스턴스 : 컴퓨터 한 대 라고 생각하면 편하다.
+
+* 로드 밸런서 : 컴퓨터 여러개 둘 때 앞단에 하나 두는 것
+
+* 볼륨 : 볼륨 하나당 하드디스크라고 생각하면 된다. 유지하는 데 있어서 비용이 든다.
+
+* 키 페어: 인증 관련, 보안 유지
+
+* 탄력적 IP : 기본적으로 인스턴스 하나당 하나의 IP 받는다. 이러한 고정IP를 발급해주는 것
+
+* ssh ubuntu@탄력적 IP -i pem키 디렉토리 : 커맨드 입력하면 cmd 창에서도 원격으로 서버에 접속하여 사용할 수 있다.
+
+* ~ : 홈 디렉토리
+
+* vim 에디터 명령어
+
+* a : append , 누르면 입력 가능
+
+* esc 누르고 :wq 하면 저장하고 나간다.
+
+* cat 파일이름 : 파일의 전체 내용들 볼 수 있다.
+
+* tail 파일 이름 : 파일의 마지막 일부 내용만 보여준다.
+
+* python manage.py runserver 0:8000  명령어를 입력하여 서버를 실행한다. 0:8000을 붙여야 8000 포트로 접속 가능
+
+* requirements.txt 파일에 설치해둔 패키지들 다 넣어두면 가상환경에서 한번에 패키지 설치 관련 이슈 해결 가능
+
+* Env 폴더는 지우지 마라. 안그러면 가상환경 안된다.
+
+
+
+* settings.py 지우고 settings 폴더 만든 뒤 __init__.py 만든다. 해당 파일 안에 from .common import * 작성
+
+* settings.py 폴더 안에 common.py 만들고, 기존 settings.py 내용 그대로 옮겨놓는다.
+
+* 이렇게 하고 runserver하면 settings.py 있을 때 서버 실행시키는 것과 같다.
+
+* python manage.py runserver 0:8000 --setting=piro_board.settings.prod 처럼 원하는 환경 지정 후 서버 실행 가능
+
+* python manage.py collectstatic --setting=piro_board.settings.prod : static 파일들을 모아준다.
+
+* dirname : 폴더의 경로 반환, 경로에 해당되는 폴더의 이름까지 있으면 폴더를 반환한다.
+
+* BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+* os.path.abspath(__file__) 현재 자신을 감싸고 있는 상위폴더 (settings 폴더를 만들었다면, setting 폴더이고, 아니면 프로젝트 폴더이겠지?)
+
+* os.path.dirname(os.path.abspath(__file__)) 상위 폴더의 경로 경로에 폴더 이름까지 있으므로 settings 폴더가 되겠다.
+
+* os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 폴더의 경로
+
+* 심볼릭 링크를 만들 때 경로는 항상 절대경로이어야 한다.
+
+* wsgi.py 에서 "piro_blog.settings" 를 "piro_blog.settings.prod" 로 바꾼다.

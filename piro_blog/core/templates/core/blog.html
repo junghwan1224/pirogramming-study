@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class='blog_container'>
+            <div id='blog_title'>{{ article.title }}</div>
+            <div class='blog_date'>{{ article.created_at|date:'Y. m. d. h:i A' }}</div>
+            <div class='blog_date'>Jeong Hwan</div>
+            <div id='blog_content'>
+                <p>
+                {{ article.content }}
+            </p>
+            </div>
+            <a href="{% url 'core:blog_list' %}"><button style='padding: 10px; 20px'>목록으로</button></a>
+
+            <div style='float: right;'>
+                <a href="{% url 'core:blog_update' article.pk %}">수정</a>
+                <form id='article_delete_form' style='display: inline-block;' method="POST" action="{% url 'core:blog_delete' article.pk %}">
+                    {% csrf_token %}
+                    <button type='submit'>삭제</button>
+                </form>
+                <script>
+                    $('#article_delete_form').submit(function(e){
+                        if(!confirm('Do you delete?')){
+                            e.preventDefault();
+                        }
+                    });// submit 될 때 해당 함수 먼저 실행된다.
+                </script>
+            </div>
+
+
+            <!-- 태그 영역 -->
+            <div id='tag_area' style='margin-top: 20px;'>
+                {% for tag in article.tag.all %}
+                <div class='chip'>{{ tag.name }}</div>
+                {% endfor %}
+            </div>
+
+
+            <!--<div id='like_button_wrapper'>
+                <form action="{% url 'core:blog_like' article.pk %}" method='POST'>
+                    {% csrf_token %}
+                    <button class="btn {% if did_like_article %}liked{% endif %}" type='submit'>추천 {{article.liker_set.count}}</button>
+                </form>
+            </div>-->
+            <div id='like_button_wrapper'>
+                <a id="like_button" href="{% url 'core:blog_like' article.pk %}">
+                    <button id='btn' class='btn-default'>like {{ article.liker_set.count }}</button>
+ +            </a>
+            </div>
+
+            <script>
+                $('#like_button').click(function(e){
+                    var url = $(this).attr('href');
+
+                    $.post(url)
+                    .done(function(r){
+                        $('#btn').css('background', 'cyan');
+                    })
+                    .fail(function(){
+                        alert('article like error');
+                    });
+
+                    return false;
+                });
+            </script>
+
+
+            <!-- 댓글 영역 -->
+            <form method='POST' id='comment_form'>
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button type='submit'>Submit</button>
+            </form>
+            <script>
+                $('#comment_form').submit(function(e){
+                    e.preventDefault();
+                    var content = $('#id_content').val();
+                    alert(content);
+                });
+            </script>
+
+            {% if article.comment_set.count %}
+            <div class='comment_area'>
+
+                    {% for comment in article.comment_set.all %}
+                    <li>
+                       <span class='comment_author'>{{ comment.author.username }}</span> :
+                            <apan class='comment_comment'>{{ comment.content }}</apan>
+                            <span class='comment_create_at'>{{ comment.created_at|date:'Y. m. d. h:i A' }}</span>
+
+                            <form method='POST' action="{% url 'core:comment_like' comment.pk %}">
+                                {% csrf_token %}
+                                <button class='btn {% if comment.comment_like %}liked{% endif %}'>comment like  {{ comment.comment_like.count }}</button>
+                            </form>
+                            <p></p>
+
+                    </li>
+                    {% endfor %}
+
+            </div>
+            {% endif %}
+        </div>
+
+{% endblock %}
+    </body>
+    </html>

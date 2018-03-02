@@ -1,0 +1,20 @@
+* python manage.py makemigrations 마이그레이션 파일 생성, 데이터 베이스에 어떻게 반영할 것인지를 설정
+
+* python manage.py migrate 만들어둔 migrations를 토대로 데이터베이스 생성,
+
+* 데이터베이스에 반영이 됐다는 무슨 뜻? 테이블을 만들었다는 의미, 저장소 세팅이라 생각해요.
+
+* python manage.py createsuperuser : admin 사이트 계정 등록
+
+* admin.py에서 패키지 호출 후에 admin.site.register(Article) 추가
+
+* article = Article.objects.get(pk=pk)
+
+* path('article/<int:pk>',views.blog_detail,name='blog_detail'), 경로에 name을 통해서 이름을 부여할 수 있다.
+
+* url 지정<a href='/article/{{ article.pk }}'>이렇게 할 수도있다. 그러나 하드코딩.
+ <a href='/article/<int:pk>'>이렇게 하면 나중에 주소체계가 바뀌면 다 수정해야 한다.
+
+* <a href="{% url 'blog_detail' article.pk %}"> article.pk는 태그가 아니기 때문에 {{}}로 감쌀 필요 없다.
+
+* {% csrf_token %} form 태그 안에서 무조건 적어라. 폼 데이터 제출 할 때 어디 들렸다 오는지 확인하는 것. 발급된 토큰을 통해 비교. 이거 안쓰면 에러난다.

@@ -1,0 +1,61 @@
+2018. 01. 10
+
+ * function
+목적? 논리 단위를 패키징
+반복 사용 가능 -> 소스코드 내 중복 제거
+def func_name(arg,arg2,arg3,arg4=None):
+    logic
+    logic
+    return 리턴값
+#arg는 없을수도 return도 없을수도 있다.
+#arg4 = None을하면 인자 호출을 안해도 된다
+ex) func_name(1,2,3,4) or func_name(1,2,3,arg4=4)
+
+
+ * package
+
+ if __name__ == '__main__':
+    logic
+=> 직접 실행했을 때만 동작
+
+
+ * class
+class class_name:
+    var1 = 1    # called 'property'
+    var2 = 100
+    var3 = 'hi'
+
+    def method1(self): # called 'method'
+        ret = self.var1 + self.var2
+        return ret
+
+    def method2(self,string):
+        print(string)
+
+class = 일종의 데이터 타입
+instance = data
+
+
+ * 상속
+ class class_name(상속받을 클래스 이름):
+    var1 = ~
+    var2 = ~
+
+    def method1(self):
+        logic ~
+
+
+ * __init__
+생성자
+class Hw(object): # object는 상속 안받을 때 사용
+    def __init__(self,title,due):
+        self.title = title
+        self.due = due
+
+hw = Hw('title','due')
+
+
+ * 객체들을 합치는 것도 있다. __add__(self, ...)
+
+ http://javamin.tistory.com/35
+ 두번째 과제 참고 사이트

@@ -1,0 +1,17 @@
+<div class='login_box'>
+{% if request.user.is_authenticated %}
+<h3>You already login! Do you want logout?</h3>
+
+
+{% else %}
+<form method='POST'>
+  {% csrf_token %}
+  user information
+  {{ signup_form.as_p }}
+  --------------------------<br>
+  profile information
+  {{ profile_form.as_p }}
+  <button class='btn' type='submit'>join</button>
+</form>
+{% endif %}
+</div>

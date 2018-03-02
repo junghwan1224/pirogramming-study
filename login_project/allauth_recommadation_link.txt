@@ -1,0 +1,9 @@
+https://www.youtube.com/watch?v=xV9hgVriNNA
+
+https://wsvincent.com/django-allauth-tutorial/
+
+https://wikidocs.net/9942
+
+https://github.com/askdjango/django-allauth-providers-ko
+
+https://medium.com/@frfahim/django-registration-with-confirmation-email-bb5da011e4ef

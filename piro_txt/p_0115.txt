@@ -1,0 +1,95 @@
+* Django
+
+models.py : 데이터 관련 작업 처리
+
+template : 폼 양식 기존 html 과의 차이라면, 반복문, 조건문 등을 쓸 수 있다.
+
+views.py : 템플릿과 모델을 연결해준다고 보면 된다.
+
+핵심은 데이터와 템플릿을 분리하는 것 (하나로 합치면 소스가 복잡해진다.)
+
+
+* 예외처리
+a = 1
+b = 0
+
+try:
+    c = a/b #ZeroDivisionError
+except:
+    c = a/(b+1) # 예외 발생시 여기에 있는 내용 처리
+    # 이렇게 하면 모든 에러에 대해 반응을 하게 된다. 이럴땐 => except ZeroDivisionEror: 이런식으로 고쳐준다. 이러면 0으로 나눌 때의 에러에만 반응
+
+
+ * 가상환경
+
+ mkvirtualenv piro // piro라는 이름의 가상환경 진입
+
+ * pip install django
+
+ * django-admin startproject project_name # make new project
+
+ * python manage.py runserver # 개발서버 실행
+
+ * python manage.py startapp core # core라는 이름의 app 만듦, app은 여러개가 될 수 있다.
+
+ * templates 폴더 만들고 그 안에 core 와 동일한 이름의 폴더 만든다. 정리하기 편하도록 폴더 만든 것이다.
+
+ * app이 여러개 생길 수 있기 때문에 폴더를 만들어 정리를 해뒀다. core라는 폴더는 없어도 된다.
+
+ * templates/core 안에 html 파일 저장
+
+ * settings.py에 core 추가 # app을 정상적으로 작동시키기 위함
+
+ * urls.py에 from core import views
+
+ * urlpatterns 안에 경로 및 views 함수 지정
+
+ * views.py에 페이지를 렌더링하기 위한 함수 만든다.
+
+
+ * retrun render(request,'템플릿 경로') # request에 대한 reponse로 반환
+
+ * views.py 내에서 함수 인자에 request는 무조건 있어야 함
+
+ * django template filter # 양식 변경
+
+ * django template tag
+   {% for i in range(10) %}
+   {% endfor %}
+
+   {% if i < 5 %}
+   {% endif %}
+
+ * forloop.counter
+   forloop.last # 반복문에서 마지막 값만 True
+   얘네는 {%  %} 이렇게 쓰면 안되고 {{  }} 이렇게 써야한다.
+
+ * https://docs.djangoproject.com/en/2.0/ref/templates/builtins/
+  장고 템플릿 필터 관련 정보 링크
+
+ * {% empty %} 반복문이 None일 경우 해당 태그에 작성한 내용 출력
+
+
+* 가변적인 url 호출 (가변인자)
+* url 작성할 때 뒤에 꼭 / 붙이기 !
+
+* path('<int:pk>/',views.first_dynamic),
+    들어온 정수를 pk 안에 저장시켜서 두번째 인자의 함수에 포함시켜라
+    <int:pk> 다 붙여써라
+    입력한 수가 전부 int 인 경우에만 캡쳐
+
+* 만약 위의 path에서 1이나 2가 있으면,
+    path('1/') 이런거처럼, 그러면 위에서 걸러진다.
+    없으면 pk에 저장되는거다.
+
+* <str:pathStr> 이렇게 하면 /를 제외한 문자를 입력할 수 있다.
+
+* os.path.join() # 경로 합성
+
+* base가 되는 html에 {% block content %}{% endblock %}
+
+* base를 이용할 html에 상단에 {% extends 'base.html' %} 작성
+
+{% block content %}
+html 내용들
+{% endblock %}

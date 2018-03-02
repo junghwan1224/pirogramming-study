@@ -1,0 +1,21 @@
+{% extends 'base_nav.html' %}
+
+
+{% block content %}
+        <div class='blog_container'>
+            <div id='blog_title'>{{ blog_title2 }}</div>
+            <div class='blog_date'>{{ now|date:'Y. m. d. h:i A' }}</div>
+            <div class='blog_date'>Jeong Hwan</div>
+            <div id='blog_content'>
+                {% for i in range_5 %}
+
+                <p>
+                기업들이 반도체 칩 디자인의 결점을 해커들이 이용하는 것으로부터 자신을 보호할 유일한 방법은 컴퓨터 시스템을 완전히 교체하는 방법 뿐이라고 사이버 안보 전문가들이 경고했다고 영국 파이낸셜 타임스(FT)가 4일(현지시간) 보도했다.
+            </p>
+
+            {% endfor %}
+            </div>
+        </div>
+{% endblock %}
+    </body>
+    </html>

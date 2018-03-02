@@ -1,0 +1,13 @@
+body {
+    /*background-color: gray;*/
+}
+
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: red;
+    text-decoration: none; /* a 태그에서 밑줄 제거 */
+}

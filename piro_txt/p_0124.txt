@@ -1,0 +1,33 @@
+* filter 메소드 안에 언더바 2개(__)쓰고 사용할 수 있는 메소드가 몇 개 있다. Aritcle.objects.filter(title__contains='안녕') 같은 경우에는 제목에 '안녕'이라는 텍스트가 포함된 결과 반환
+
+* django queryset 관련 문서들 찾아보면 filter에 관련된 정보들 찾을 수 있다. django queryset filter
+
+* models.ManyToManyField : 다대다 관계
+
+* 보통 blank=True, null=True는 같이 묶어서 쓴다.
+
+* related_name은 기존 외래키 참조시 기본 값인 이름_set 값 대신 사용할 수 있다.
+
+* 다대다 관계, article이 여러개의 tag를 가질 수도 있고, 반대로 tag도 여러개의 article을 가질 수 있다.
+
+* 다대다 참조도(ManyToMany) 반대로 쓸 수 있다. ex) tag.article_set.all() 이런식으로 외래키 때 했던 것처럼. 이러며너 해당 태그와 관계를 맺은 article 결과가 나온다.
+
+* a.tag 하면 바로 안뜨고, relate_manager 같은거 뜬다.
+
+* a.tag.all() 하면 Queryset 하고 결과 뜬다.
+
+* article.tag.remove(t1) 하면 해당 태그 삭제
+
+* t1.article_set.clear() 하면 해당 태그와 연결된 article 모두 삭제
+
+* django queryset 문서 꼭 읽어보세요!
+
+* exclude() 메소드는 filter의 반대라고 보면 된다. exclude(조건)은 조건에 부합되는 것을 제외하고 불러온다.
+
+* forms에 Tag를 import하지 않아도 자동으로 뜬다.
+
+* static 파일은 처음에 세팅되어 있으므로 따로 세팅을 해주지 않아도 된다. 그러나 media 파일은 따로 해둬야 한다.
+
+* https://www.youtube.com/watch?v=_oMY2o2NhWM
+* https://docs.djangoproject.com/en/2.0/ref/forms/widgets/
+django form에서 직접 태그 속성 추가하는 부분 문서 및 동영상 링크

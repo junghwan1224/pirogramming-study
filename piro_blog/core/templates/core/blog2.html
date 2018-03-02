@@ -1,0 +1,64 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='utf-8' />
+        <title>blog</title>
+        <style>
+        .blog_container{
+            width: 1000px;
+            margin: 0 auto;
+            /*border: groove;*/
+        }
+        h1{
+            color: green;
+        }
+        hr {
+            margin-bottom: 100px;
+            height: 2px;
+            background: black;
+            width: 100%;
+            border: none;
+        }
+        #blog_title{
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 35px;
+            font-weight: bold;
+        }
+        .blog_date{
+            text-align: right;
+        }
+        #blog_content{
+            margin-top: 70px;
+        }
+        </style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class='blog_container'>
+          <h1>{{ site_title2 }}</h1>
+        </div>
+        <hr>
+        <div class='blog_container'>
+            <div id='blog_title'>{{ blog_title2 }}</div>
+            <div class='blog_date'>{{ now|date:'Y. m. d. h:i A' }}</div>
+            <div class='blog_date'>Jeong Hwan</div>
+            <div id='blog_content'>
+                {% for i in range_10 %}
+                {% if i < 5 %}
+                {{ i }}
+                <p>
+                기업들이 반도체 칩 디자인의 결점을 해커들이 이용하는 것으로부터 자신을 보호할 유일한 방법은 컴퓨터 시스템을 완전히 교체하는 방법 뿐이라고 사이버 안보 전문가들이 경고했다고 영국 파이낸셜 타임스(FT)가 4일(현지시간) 보도했다.
+            </p>
+            {% endif %}
+            {% empty %}
+            no content
+            {% endfor %}
+            </div>
+        </div>
+    </body>
+    </html>

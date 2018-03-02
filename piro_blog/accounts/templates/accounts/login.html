@@ -1,0 +1,19 @@
+<div class='login_box'>
+{% if request.user.is_authenticated %}
+{{ request.user.username }}
+<form action="{% url 'accounts:logout' %}" method='POST'>
+  {% csrf_token %}
+  <button class='btn' type='submit'>logout</button>
+</form>
+
+
+{% else %}
+<form method='POST'>
+  {% csrf_token %}
+  {{ form }}
+  <button class='btn' type='submit'>login</button>
+</form>
+
+<a href="{% url 'accounts:signup' %}"><button class='btn'>join</button></a>
+{% endif %}
+</div>

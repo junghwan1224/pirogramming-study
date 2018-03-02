@@ -1,0 +1,79 @@
+1.
+*
+**
+***
+****
+*****
+.
+.
+.
+********** 15개
+
+2.
+*
+***
+*****
+*******
+.
+.
+.
+*********** 15개
+
+3.
+     *
+    ***
+   *****
+    ***
+     *
+
+range(6) => 0 1 2 3 4 5 (올라갈 때)
+range(4,-1,-1) => 4 3 2 1 0 (내려갈 때)
+
+ctrl + h => find and replace
+
+homework
+가위바위보 게임
+요구사항
+1. 유저한테 인풋을 받아서 가위, 바위, 보 선택하도록
+(1번이면 가위, 2번이면 바위, 3번이면 보 등)
+2. 컴퓨터는 가위, 바위, 보 중 random 하게 선택
+3. 결과 출력 예) 졌습니다. 이겼습니다. 비겼네요.
+4. 결과 출력 시, 내가 무얼 냈는지, 컴퓨터가 무얼 냈는지 함께 출력
+
+advanced 요구사항
+1. 게임이 반복 실행 가능하도록
+2. 가위, 바위, 보 입력 받는 창에서 q or Q 입력 시 종료 메세지와 함께 게임 종료
+3. 누적 스코어 출력 (누적 패까지는 안해도 된다. 몇승 몇패 이정도만)
+4. 유저 입력은 1, 2, 3,q, Q으로 제한, 다른걸 입력시 재입력 받도록.
+
+
+------------------------------------
+2018.1.10 문제풀이
+
+if user == com:
+    print('draw')
+elif (user + 1) % 3 == com % 3:
+    print('lose')
+elif (user - 1) % 3 == com % 3:
+    print('win')
+
+* format method
+ex)
+'hihi %d' % 3 # c언어 처럼 자료형으로도 가능
+'hihi {0}'.format('넣을거') # 자료형은 크게 신경 안써도 된다.
+
+while True: # 입력 제어 부분
+    input_str = input(input_msg)
+    if input_str in ['1','2','3','q','Q']:
+        if input_str in ['q','Q']:
+            print('end')
+            exit()
+        else:
+            user = int(input_str)
+------------------------------------
+* python random package
+
+import random
+
+random.randint(1,3) # 1 ~ 3 return
+random.choice(['가위','바위','보']) # random value reutrn in list

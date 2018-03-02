@@ -1,0 +1,29 @@
+* 팀 <- 유저 foreignkey 관계
+* team.profile_set.all() 로 접근 가능
+
+* request.user.profile.team.name으로 해서 유저로 접근 가능
+
+* get 방식 로그아웃에 대해 : 굳이 post 방식으로 처리안해도 된다. 방법의 차이로 보면 된다.
+
+* 하나의 게시글에 게시 가능한 댓글의 수를 제한하고자 할 때
+
+* comment_count = article.comment_set.filter(author=request.user).count()
+* if comment_count < 5:
+*   new_comment = comment_form.save(commit=False) ~~ 이런식으로
+
+* def clean(self) 메소드가 있다(clean_title 이런게 아니라 그냥 clean), 이 친구는 return value를 해주지 않는다. 그냥 raise error 해준다. form 자체에서 에러 발생. form에서 validation 체크를 할 때 각 필드에 대해 clean_필드명(self) 메소드를 다 실행한 다음에 clean 메소드를 실행한다.
+
+* clean메소드는 주로 서로 다른 필드에 대해 validation 하거나 없는 필드에 대해 validation 하고자 할 때 사용한다.
+
+* clean 메소드 내에서 댓글 횟수 제한 내용을 작성하여 views 내용을 간소화 시킬 수 있다.
+
+* __init__(*args, **kwargs)
+CommentForm(1, 2, a=1, b=2)
+in __init__
+args = [1, 2]
+kwargs = {'a': 1, 'b': 2}
+
+func(*args) = func(1, 2)
+func(**kwargs) = func(a=1, b=2)
+
+* 위와 같이 하면 장점 : 함수의 keyword argument를 동적으로 할당해줄 수 있다.

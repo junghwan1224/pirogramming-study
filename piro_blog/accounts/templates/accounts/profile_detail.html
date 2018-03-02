@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>{{ profile.user }}'s profile</h4>
+<img class='responsive-img' src="{{ profile.image_url }}" />
+<p>birth day : {{ profile.birth_day|date:'Y. m. d.'|default:'none' }}</p>
+<p>description : {{ profile.description|default:'none' }}</p>
+{% if request.user.profile == profile %}
+<a href="{% url 'accounts:profile_update' %}" type='button' class='btn'>edit profile</a>
+{% endif %}
+{% endblock %}

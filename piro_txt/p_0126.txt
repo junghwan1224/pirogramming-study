@@ -1,0 +1,33 @@
+* ctx['comment_form'] = CommentForm() 문제점 : 새로 고침 시 이전에 입력했던 정보가 계속 전송됨.
+
+* app 이름을 accounts라고 하는 이유는 account는 기존에 있는 app에서 동일한 이름이 있기 때문에 충돌이 일어날 수 있다.
+
+* django.conrib.auth : 장고 인증 관련 app. 이 app 내에 user model이 지정되어 있다.
+
+* app마다 urls 파일을 만든 후 각각의 urls를 불러오기 위해 include 모듈 임포트 해준다.
+
+* 이름이 같아서 충돌하는 경우도 있는데, 이 때는 먼저 선언된 것을 불러온다. 이를 막기 위해 namespace를 지정한다.
+
+* namespace를 지정한 후에는 템플릿에서 url 태그에 namespace를 추가해준다. {% url 'core:blog_list' %} 이런식으로. reverse() 메소드 내에서도 마찬가지로 수정해준다.
+
+* path('', include('core.urls', namespace='core')), 여기서 첫 번째 인자는 url prefix 해준다.
+
+* https://github.com/django/django/ : django 코드 나와 있으니 import 하는 내용들 궁금하면 찾아볼 수 있다.
+
+* 로그인 안하면 request.user는 unauthenticate 상태. print 찍어보면 NoneType 으로 나오지만, 결국 위에 언급한 것을 의미
+
+* authenticate 메소드는 첫 번째 필수인자로 request 받고 두 번쨰 인자로 선택 인자를 받는다.
+
+* {% if request.user.is_authenticated %} 로그인 했는지 안했는지 알려주는 조건문
+
+* AuthenticationForm 은 입력한 유저의 정보가 데이터베이스에 저장된 정보와 일치하는지 vaildation을 해주는 것이 핵심이다.
+
+* password 수정할 때는 form import 하고 set_password('raw_password') 메소드 사용하면 된다.
+
+* django에서는 들어온 get query를 request.GET에서 확인할 수 있다.
+
+* login_required는 url.py 에서 login_required(views.func_name) 으로 작성해주거나 views에서 해당 함수에서 데코레이터 추가해준다. @login_required
+
+* django 권한 관련은 django permission 검색해서 찾아보길
+
+* html 파일에서 주석처리 해도 주석 안에 url 관련 내용들도 다 인식하기 때문에 필요 없다 생각하는 부분은 지우거나 주석부분도 에러 안날 수 있게 수정해준다.

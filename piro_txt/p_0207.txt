@@ -1,0 +1,42 @@
+* callback function : 어떤 상황이 완료되었을 때 지정된 함수를 호출한다.
+
+* done : 서버로부터 응답이 왔을 때 해당 콜백함수를 실행하라 ex) r = $.get('.').done(function(r){
+  console.log(r)
+})
+.fail(function(e){
+  alert('error');
+});
+
+* $.post(url, {data: data})
+.done(function(r){
+  console.log(r);
+})
+.fail(function(e){
+  console.log(e);
+});
+
+* done 에서 콜백함수 인자 r은 들어온 응답, 즉 response이다.
+
+* $(this).data('pk'); : data 메소드는 태그에서 data로 정의 된 걸 가져온다.
+
+* csrf_exempt : csrf 검증을 제외시키는 것이다. 가급적 안쓰는 것이 좋다.
+
+* append : 영역 뒤에 추가
+
+* prepend : 영억 앞에 추가
+
+* location.href : 현재 주소 가져온다.
+
+* django ajax csrf 검색해서 문서에서 해당 내용을 처리하는 코드를 js 파일을 만들어 붙여넣어 csrf 처리를 통합적으로 해준다.
+
+* render_to_string() : 첫 번째 인자는 템플릿 명, 두 번째 인자는 컨텍스트. 실행시키면 인자로 받아온 템플릿 안에 두 번째 컨텍스트를 스트링으로 보낸다.
+
+* 자바스크립트로 값을 가져오거나 부르면, 히스토리가 안남는다.
+
+* $("input[name=content]") : input 태그 중에서 name 값이 content인 태그를를 가져오는 선택자
+
+* $("input[name=content]").val() : 해당 태그의 값을 가져온다.
+
+* 값이 제대로 넘어왔는지 아닌지는 http status code 를 보고 확인할 수 있다.
+
+* ajax용 템플릿을 따로 만들어서 {% include 'core/comment.html' %} 을 작성하여 템플릿을 삽입한다. 이러한 방식으로 작성할 시 장점은 해당 부분을 두 번 수정할 일이 사라진다.
